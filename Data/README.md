@@ -3,7 +3,7 @@
 ### Data Source
 
 - ***Existing Mapping***: http://mappings.dbpedia.org/server/mappings/<lang>/pages/rdf/all 
-- ***Article Template Links***: http://downloads.dbpedia.org/2015-10/core-i18n/<lang>/article_templates_<lang>.ttl.bz2 
-- ***Interlanguage Links***: http://downloads.dbpedia.org/2015-10/core-i18n/<lang>/interlanguage_links_<lang>.ttl.bz2
+- ***Article Template Links***: http://downloads.dbpedia.org/2015-10/core-i18n/&lt;lang&gt;/article_templates_&lt;lang&gt;.ttl.bz2 
+- ***Interlanguage Links***: http://downloads.dbpedia.org/2015-10/core-i18n/&lt;lang&gt;/interlanguage_links_&lt;lang&gt;.ttl.bz2
 
-**Replace <lang> with specific language, e.g. "en", "zh"**
+Replace &lt;lang&gt; with specific language, e.g. "en", "zh"
