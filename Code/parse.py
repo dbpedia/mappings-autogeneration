@@ -67,9 +67,7 @@ class Template:
 
 	def isMatched(self, t):
 		names = set(self.redirects + [self.name])
-		tnames = set(t.redirects + [t.name])
-		intsec = names.intersection(tnames)
-		return len(intsec) > 0
+		return t in names
 
 def getExistingMapping(lang="en"):
 	G = g.Graph()
@@ -174,8 +172,39 @@ def getStatistic(lang="en"):
 	print("Among them, %d templates have been mapped" % sum([t.isMapped() for t in templateList]))
 
 def main():
-	getExistingMapping(lang="en")
-	getStatistic(lang="en")
+	#getStatistic(lang="en")
+	#getStatistic(lang="zh")
+	templates_en = pkl_utils._load(config.TEMPLATE_OUTPUT["en"])
+	templates_zh = pkl_utils._load(config.TEMPLATE_OUTPUT["zh"])
+
+	processors = [
+		LowerCaseConverter(),
+		LetterLetterSplitter(),
+	]
+	processor = UnitProcessor(processors)
+
+	infile = open(config.TEMPLATE_LINKS["zh"])
+	linkList = []
+	for line in infile.readlines():
+		items = line.split()
+		t1 = processor.process(items[0][41:-1])
+		t2 = processor.process(items[2][38:-1])
+		if "/" in t1:
+			continue
+		linkList.append((t1, t2))
+	c1 = 0; c2 = 0
+	for link in linkList:
+		for t in templates_zh:
+			if t.isMatched(link[0]):
+				c1 += 1
+				break
+		for t in templates_en:
+			if t.isMatched(link[1]):
+				c2 += 1
+				break
+	print c1, c2
+
+
 
 if __name__ == "__main__":
 	main()

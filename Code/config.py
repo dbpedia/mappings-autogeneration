@@ -26,3 +26,12 @@ TEMPLATE_OUTPUT = {
 	"en" : "%s/templates_en.pkl" % OUTPUT_DIR,
 	"zh" : "%s/templates_zh.pkl" % OUTPUT_DIR,
 }
+
+TEMPLATE_LINKS = {
+	"zh" : "%s/template_links_zh.ttl" % DATA_DIR,
+}
+
+ARTICLE_TEMPLATES = {
+	"en" : "%s/article/article_templates_en.ttl" % DATA_DIR,
+	"zh" : "%s/article/article_templates_zh.ttl" % DATA_DIR,
+}

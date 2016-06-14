@@ -1,8 +1,0 @@
-PREFIX rr: <http://www.w3.org/ns/r2rml#>
-
-SELECT ?template ?class 
-WHERE
-{
-	?template rr:subjectMap ?mapping .
-	?mapping rr:class ?class .
-}
