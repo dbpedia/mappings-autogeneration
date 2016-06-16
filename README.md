@@ -28,8 +28,8 @@ After use ```parse.py```, we can get a matrix as follows for the given target la
 
 template_zh | article_zh | template_en | article_en | class
 :---------: | :--------: | :---------: | :--------: | :---:|
- | | | | 
- | | | |
- | | | |
+Authority_control | Slackware | Infobox_OS | Slackware | Software 
+Authority_control | OpenSUSE | Authority_control | OpenSUSE | owl#Thing
+Authority_control | FreeBSD | Infobox_OS | FreeBSD | Software
 
 ### Experiments
