@@ -11,7 +11,7 @@ The mapping algorithm is summaried in the above figure and implemented as follow
 - Given as input infobox taken from a version of Wikipedia in a specific language, we collect all the page that include this infobox.
 - Use the cross-language links to retrieve the pages in the selected pivot languages, for which we know the DBpedia classes.
 - Collect the DBpedia classes of these pages and count their number of occurrences.
-- The input infobox is then mapped to the most frequent class. A parameter between 0 and 1 is used to filter the class whose frequency is less than the parameter.
+- The input infobox is then mapped to the most frequent class. A parameter between 0 and 1 is used to filter the class whose frequency is less than the parameter. In addition, we ignore the infox whose occurrence is too small, like less than 10.
 
 ### Source Code and Usage
 
@@ -19,4 +19,17 @@ The source codes are all stored in the **Code** directory.
 
 - ```config.py``` defines the paths and parameters in the program. Modify it to fit your own environment if necessary.
 - ```download.py``` can download the needed datasets for a specified language.
-- ```parse.py```
+- ```parse.py``` transforms the given data into the entity matrix, given the target language and the pivot language, see **Example** for details.
+- ```evaluate.py``` gives the precision and recall of a target language based on the given pivot languages.
+
+### Example
+
+After use ```parse.py```, we can get a matrix as follows for the given target language and pivot language:
+
+|template_zh|article_zh |template_en|article_en|class|
+|-|-|-|-|-|
+| | | | | |
+| | | | | |
+| | | | | |
+
+### Experiments

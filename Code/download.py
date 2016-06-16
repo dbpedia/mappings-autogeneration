@@ -3,7 +3,7 @@ import os
 from optparse import OptionParser
 
 def parse_args(parser):
-	parser.add_option("-l", "--lang", default="en", type="string", dest="lang", help="specify the languages to download")
+	parser.add_option("-l", "--lang", default="en", type="string", dest="lang", help="specify the language to download")
 	parser.add_option("-m", "--mapping", default=True, action="store_false", dest="mapping", help="don't download dataset for existing mappings")
 	parser.add_option("-a", "--article", default=True, action="store_false", dest="article", help="don't download dataset for article template links")
 	parser.add_option("-i", "--inter", default=True, action="store_false", dest="inter", help="don't download dataset for interlanguage links")
