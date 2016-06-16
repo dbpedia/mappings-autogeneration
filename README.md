@@ -26,10 +26,10 @@ The source codes are all stored in the **Code** directory.
 
 After use ```parse.py```, we can get a matrix as follows for the given target language and pivot language:
 
-| template_zh | article_zh | template_en | article_en | class |
-| -:| -:| -:| -:| -:|
-| | | | | |
-| | | | | |
-| | | | | |
+template_zh | article_zh | template_en | article_en | class
+:---------: | :--------: | :---------: | :--------: | :---:|
+ | | | | 
+ | | | |
+ | | | |
 
 ### Experiments
