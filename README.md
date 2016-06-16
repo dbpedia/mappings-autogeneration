@@ -28,8 +28,8 @@ After use ```parse.py```, we can get a matrix as follows for the given target la
 
 |template_zh|article_zh |template_en|article_en|class|
 |-|-|-|-|-|
-| | | | | |
-| | | | | |
-| | | | | |
+|x|x|x|x|x|
+|x|x|x|x|x|
+|x|x|x|x|x|
 
 ### Experiments
