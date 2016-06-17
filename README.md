@@ -20,7 +20,7 @@ The source codes are all stored in the **Code** directory.
 - ```config.py``` defines the paths and parameters in the program. Modify it to fit your own environment if necessary.
 - ```download.py``` can download the needed datasets for a specified language.
 - ```parse.py``` transforms the given data into the entity matrix, given the target language and the pivot language, see **Example** for details.
-- ```evaluate.py``` gives the precision and recall of a target language based on the given pivot languages.
+- ```predict.py``` gives predicted mapping for the target language based on the given pivot languaes. With option "-e", it can also calculate the precision and recall of the target language based on the existing mapping on DBpedia.
 
 ### Example
 
