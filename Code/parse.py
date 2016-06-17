@@ -119,7 +119,7 @@ def getILL(lang, target):
 
 def process(lang, pivot):
 	print "[%s]: process for language %s" % (time_utils._timestamp(), lang)
-	linkDict = pkl_utils._load(config.ILL_DICT["zh2en"])
+	linkDict = pkl_utils._load(config.ILL_DICT["%s2%s" % (lang, pivot)])
 	templateDict = pkl_utils._load(config.TEMPLATE2ARTICLE[lang])
 	articleDict = pkl_utils._load(config.ARTICLE2TEMPLATE[pivot])
 	mapping = pd.read_csv(config.EXISTING_MAPPING_OUTPUT[pivot], index_col="template")
