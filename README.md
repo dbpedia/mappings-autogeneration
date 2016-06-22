@@ -40,3 +40,7 @@ Authority_control | OpenSUSE | Authority_control | OpenSUSE | owl#Thing
 Authority_control | FreeBSD | Infobox_OS | FreeBSD | Software
 
 ### Experiments
+
+In the experiments, we exploits existing handcrafted mappings in six languages (English, Italian, German, Portuguese, Spanish, French). Experiments have benn carried out on 5 languages (Bulgarian, Czech, Indonesian, Dutch and Catalan).
+
+Precision and recall values are calculated using existing mappings from DBpedia official mapping website as gold standard.
