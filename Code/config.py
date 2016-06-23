@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 # --------------------- PATH ---------------------------
 
 # Set the paths for data directory and output directory
@@ -6,6 +6,8 @@ ROOT_DIR = "../.."
 DATA_DIR = "%s/data/DBpedia/Data" % ROOT_DIR
 OUTPUT_DIR = "%s/data/DBpedia/Output" % ROOT_DIR
 
+ONTOLOGY = "%s/dbpedia_2015-10.nt" % DATA_DIR
+ONTOLOGY_TREE = "%s/ontology.pkl" % OUTPUT_DIR
 
 EXISTING_MAPPING = {
 	"en" : "%s/mapping/existing_mapping_en.ttl" % DATA_DIR,
@@ -75,12 +77,27 @@ ILL_DICT = {
 	"zh2en" : "%s/link/dict_zh2en.pkl" % OUTPUT_DIR,
 	"zh2de" : "%s/link/dict_zh2de.pkl" % OUTPUT_DIR,
 	"bg2en" : "%s/link/dict_bg2en.pkl" % OUTPUT_DIR,
+	"bg2de" : "%s/link/dict_bg2de.pkl" % OUTPUT_DIR,
+	"bg2it" : "%s/link/dict_bg2it.pkl" % OUTPUT_DIR,
+	"bg2fr" : "%s/link/dict_bg2fr.pkl" % OUTPUT_DIR,
+	"bg2pt" : "%s/link/dict_bg2pt.pkl" % OUTPUT_DIR,
+	"bg2es" : "%s/link/dict_bg2es.pkl" % OUTPUT_DIR,
 }
 
 ENTITY_MATRIX = {
 	"zh2en" : "%s/matrix/zh2en.csv" % OUTPUT_DIR,
 	"zh2de" : "%s/matrix/zh2de.csv" % OUTPUT_DIR,
 	"bg2en" : "%s/matrix/bg2en.csv" % OUTPUT_DIR,
+	"bg2de" : "%s/matrix/bg2de.csv" % OUTPUT_DIR,
+	"bg2it" : "%s/matrix/bg2it.csv" % OUTPUT_DIR,
+	"bg2fr" : "%s/matrix/bg2fr.csv" % OUTPUT_DIR,
+	"bg2pt" : "%s/matrix/bg2pt.csv" % OUTPUT_DIR,
+	"bg2es" : "%s/matrix/bg2es.csv" % OUTPUT_DIR,
+}
+
+MAPPED_INFOBOX = {
+	"zh" : "%s/predicted/zh.csv" % OUTPUT_DIR,
+	"bg" : "%s/predicted/bg.csv" % OUTPUT_DIR,
 }
 
 # --------------------- PARAM --------------------------
@@ -94,5 +111,18 @@ LANG_PREFIX = {
 	"zh" : "http://zh.dbpedia.org/resource/",
 	"bg" : "http://bg.dbpedia.org/resource/",
 }
+
+TEMPLATE_NAME = {
+	"en" : "Template:",
+	"zh" : "Template:",
+	"bg" : "Шаблон:",
+	"de" : "Vorlage:",
+	"it" : "Template:",
+	"pt" : "Predefinição:",
+	"fr" : "Modèle:",
+	"es" : "Plantilla:",
+}
+
+MISSING_VALUE_STRING = "NA"
 
 # --------------------- OTHER --------------------------
