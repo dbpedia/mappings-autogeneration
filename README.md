@@ -11,7 +11,7 @@ The mapping algorithm is summaried in the above figure and implemented as follow
 - Given as input infobox taken from a version of Wikipedia in a specific language, we collect all the page that include this infobox.
 - Use the cross-language links to retrieve the pages in the selected pivot languages, for which we know the DBpedia classes.
 - Collect the DBpedia classes of these pages and count their number of occurrences.
-- The input infobox is then mapped to the most frequent class. A parameter between 0 and 1 is used to filter the class whose frequency is less than the parameter. In addition, we ignore the infox whose occurrence is too small, like less than 10.
+- The input infobox is then mapped to the most frequent class. A parameter **L** between 0 and 1 is used to filter the class whose frequency is less than **L**. In addition, we ignore the infox whose occurrence **C** is too small, like less than **C** = 10.
 
 ### Class Assignment
 
@@ -44,3 +44,5 @@ Authority_control | FreeBSD | Infobox_OS | FreeBSD | Software
 In the experiments, we exploits existing handcrafted mappings in six languages (English, Italian, German, Portuguese, Spanish, French). Experiments have benn carried out on 5 languages (Bulgarian, Czech, Indonesian, Dutch and Catalan).
 
 Precision and recall values are calculated using existing mappings from DBpedia official mapping website as gold standard.
+
+For Bulgarian, given **L** = 0.5, **C** = 10, the precision is 0.867, the recall is 0.520.
