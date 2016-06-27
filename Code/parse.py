@@ -1,19 +1,21 @@
+# -*- coding: utf-8 -*-
 import pandas as pd
 import rdflib.graph as g
 from utils import time_utils, pkl_utils
 import sys
 import config
 from optparse import OptionParser
+import os
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
 def parse_args(parser):
 	parser.add_option("-l", "--lang", default="zh", type="string", dest="lang", help="target language")
 	parser.add_option("-p", "--pivot", default="en", type="string", dest="pivot", help="pivot language")
-	parser.add_option("-m", "--mapping", default=True, action="store_false", dest="mapping", help="don't get existing mapping for the pivot language")
-	parser.add_option("-t", "--template", default=True, action="store_false", dest="template", help="don't get the dict from template to article for the target language")
-	parser.add_option("-a", "--article", default=True, action="store_false", dest="article", help="don't get the dict from article to template for the pivot language")
-	parser.add_option("-i", "--inter", default=True, action="store_false", dest="inter", help="don't get the interlanguage dict from the target language to the pivot language")
+	#parser.add_option("-m", "--mapping", default=True, action="store_false", dest="mapping", help="don't get existing mapping for the pivot language")
+	#parser.add_option("-t", "--template", default=True, action="store_false", dest="template", help="don't get the dict from template to article for the target language")
+	#parser.add_option("-a", "--article", default=True, action="store_false", dest="article", help="don't get the dict from article to template for the pivot language")
+	#parser.add_option("-i", "--inter", default=True, action="store_false", dest="inter", help="don't get the interlanguage dict from the target language to the pivot language")
 	(options, args) = parser.parse_args()
 	return options, args
 
@@ -36,7 +38,7 @@ WHERE {
 	ontology = [row[1] for row in results]
 	df = pd.DataFrame({'mapping':mapping, 'ontology':ontology})
 
-	df["template"] = df["mapping"].apply(lambda x: "Template:" + x[47:])
+	df["template"] = df["mapping"].apply(lambda x: config.TEMPLATE_NAME[lang] + x[47:])
 	df.to_csv(config.EXISTING_MAPPING_OUTPUT[lang], index=False)
 	print "[%s]: parsing complete" % time_utils._timestamp()
 
@@ -139,10 +141,10 @@ def process(lang, pivot):
 					templateList = []
 				c = ""
 				t = ""
-				for template in templateList:
-					if template in mapping.index:
-						c = mapping.at[template, "ontology"]
-						t = template
+				for Template in templateList:
+					if Template in mapping.index:
+						c = mapping.at[Template, "ontology"]
+						t = Template
 				template2.append(t)
 				ontology.append(c)
 
@@ -156,24 +158,25 @@ def process(lang, pivot):
 def main(options):
 	lang = options.lang
 	pivot = options.pivot
-	mapping = options.mapping
-	template = options.template
-	article = options.article
-	inter = options.inter
+	#mapping = options.mapping
+	#template = options.template
+	#article = options.article
+	#inter = options.inter
 	
-	if mapping:
+	if not os.path.isfile(config.EXISTING_MAPPING_OUTPUT[pivot]):
 		getExistingMapping(lang=pivot)
 	
-	if template:
+	if not os.path.isfile(config.TEMPLATE2ARTICLE[lang]):
 		Template2Article(lang=lang)
 	
-	if article:
+	if not os.path.isfile(config.ARTICLE2TEMPLATE[pivot]):
 		Article2Template(lang=pivot)
 	
-	if inter:
+	if not os.path.isfile(config.ILL_DICT["%s2%s" % (lang, pivot)]):
 		getILL(lang=lang, target=pivot)
 
-	process(lang=lang, pivot=pivot)
+	if not os.path.isfile(config.ENTITY_MATRIX["%s2%s" % (lang, pivot)]):
+		process(lang=lang, pivot=pivot)
 
 if __name__ == "__main__":
 	parser = OptionParser()

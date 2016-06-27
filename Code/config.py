@@ -17,6 +17,7 @@ EXISTING_MAPPING = {
 	"fr" : "%s/mapping/existing_mapping_fr.ttl" % DATA_DIR,
 	"es" : "%s/mapping/existing_mapping_es.ttl" % DATA_DIR,
 	"bg" : "%s/mapping/existing_mapping_bg.ttl" % DATA_DIR,
+	"zh" : "%s/mapping/existing_mapping_zh.ttl" % DATA_DIR,
 }
 
 EXISTING_MAPPING_OUTPUT = {

@@ -13,7 +13,7 @@ def parse_args(parser):
 	parser.add_option("-l", "--lang", default="zh", type="string", dest="lang", help="target language")
 	parser.add_option("-p", "--pivot", default="en", type="string", dest="pivots", help="pivot lanuages")
 	parser.add_option("-L", default=0.5, type="float", dest="L", help="parameter to tune the tradeoff between precision and recall")
-	parser.add_option("-C", default=10, type="int", dest="C", help="minimum occuurrence of a infobox")
+	parser.add_option("-C", default=10, type="int", dest="C", help="minimum occuurrence of an infobox")
 	parser.add_option("-e", default=False, action="store_true", dest="evaluate", help="evaluate the predicted mapping")
 	(options, args) = parser.parse_args()
 	return options, args
@@ -125,14 +125,16 @@ def main(options):
 		TP = 0 ; FP = 0
 		for t, o in zip(res["template"], res["ontology"]):
 			if t in mapping.index:
-				if o == mapping.loc[t, "ontology"]:
+				label = mapping.loc[t, "ontology"]
+				ancestor = lca(Root, o, label)
+				if (o == label) or (o == ancestor):
 					TP += 1
 				else:
 					FP += 1
 		M = mapping.shape[0]
 		print "True positives: %d" % TP
 		print "False positives: %d" % FP
-		print "False negatives: %d" % M-TP
+		print "False negatives: %d" % (M-TP)
 		print "precision: %3f" % (1.0*TP/(TP + FP))
 		print "recall:    %3f" % (1.0*TP/M)
 
