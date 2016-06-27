@@ -17,4 +17,5 @@ plt.xlabel('C')
 plt.grid(True)
 
 plt.suptitle("Performance on bulgarian given 6 pivot languages with L = 0.5")
-plt.show()
+#plt.show()
+plt.savefig('figure2.png')

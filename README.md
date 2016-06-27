@@ -28,6 +28,7 @@ The source codes are all stored in the **Code** directory.
 - ```download.py``` can download the needed datasets for a specified language.
 - ```parse.py``` transforms the given data into the entity matrix, given the target language and the pivot language, see **Example** for details.
 - ```predict.py``` gives predicted mapping for the target language based on the given pivot languaes. With option "-e", it can also calculate the precision and recall of the target language based on the existing mapping on DBpedia.
+- ```workflow.py``` combine all the above modules together. You can simply run this script to conduct the whole workflow including download, parse, predict and evaluate. 
 
 ### Example
 
@@ -49,3 +50,4 @@ For Bulgarian, we have the following results
 
 ![Alt](/Plot/figure1.png)
 
+![Alt](/Plot/figure2.png)
