@@ -45,4 +45,7 @@ In the experiments, we exploits existing handcrafted mappings in six languages (
 
 Precision and recall values are calculated using existing mappings from DBpedia official mapping website as gold standard.
 
-For Bulgarian, given **L** = 0.5, **C** = 10, the precision is 0.867, the recall is 0.520.
+For Bulgarian, we have the following results
+
+![Alt](/Plot/figure1.png)
+
