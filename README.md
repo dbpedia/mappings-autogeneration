@@ -15,7 +15,7 @@ The mapping algorithm is summaried in the above figure and implemented as follow
 
 ### Class Assignment
 
-DBpedia stores the cross-language information, but it's not used to map the infoboxes. For example, Cline Eastwood is classified as **Actor** in the French and as **Person** in the Italian one. As a result, we need to find a strategy to classify pages in all languages to the most specific class. The strategy is defined as follows:
+DBpedia stores the cross-language information, but it's not used to map the infoboxes. For example, Clint Eastwood is classified as **Actor** in the French and as **Person** in the Italian one. As a result, we need to find a strategy to classify pages in all languages to the most specific class. The strategy is defined as follows:
 
 - If the page belongs to more than one ontology class, the lowest common ancestor of these classes is assigned.
 - In the above case, if the classes are connected in a chain of subclass of relations, we consider the most specific class.
