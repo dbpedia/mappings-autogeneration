@@ -59,7 +59,7 @@ For Bulgarian, we have the following results (The results are stored in these fi
 When **L** is 0.5, **C** is 10, there are five miss classified cases in Bulgarian:
 
 label | predict | LCA
-:---: | :-----: | :-:
+:---- | :------ | :--
 Film  | Actor   | owl#Thing
 Place | AdministrativeRegion | Place
 Person | Writer | Person
