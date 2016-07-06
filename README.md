@@ -53,3 +53,17 @@ Precision and recall values are calculated using existing mappings from DBpedia 
 For Bulgarian, we have the following results (The results are stored in these files: [data_without_wikidata](/Plot/data_without_wikidata.csv) and [data_with_wikidata](/Plot/data_with_wikidata.csv))
 
 ![Alt](/Plot/figure1.png)
+
+### Case Study
+
+When **L** is 0.5, **C** is 10, there are five miss classified cases in Bulgarian:
+
+label | predict | LCA
+:---: | :-----: | :-:
+Film  | Actor   | owl#Thing
+Place | AdministrativeRegion | Place
+Person | Writer | Person
+Settlement | Village | Settlement
+FormulaOneRacing | GrandPrix | owl#Thing
+
+From which, we can find that there are 3 out of 5 cases that the predicted class is a subclass of the labeled class. In the current evaluation metric, we treat them as false positives which is not that accurate. As a result, we'd better propose a better evaluation metric.
