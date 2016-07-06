@@ -13,6 +13,10 @@ The mapping algorithm is summaried in the above figure and implemented as follow
 - Collect the DBpedia classes of these pages and count their number of occurrences.
 - The input infobox is then mapped to the most frequent class. A parameter **L** between 0 and 1 is used to filter the class whose frequency is less than **L**. In addition, we ignore the infox whose occurrence **C** is too small, like less than **C** = 10.
 
+### Use Information from Wikidata 
+
+Quite a bit entities in wikidata has a DBpedia ontology types assigned already. In addition, we have links between wikidata and other languages. As a result, we can treat wikidata as a pivot language directly. The information from wikidata can be useful to improve the performance of our approach. 
+
 ### Class Assignment
 
 DBpedia stores the cross-language information, but it's not used to map the infoboxes. For example, Clint Eastwood is classified as **Actor** in the French and as **Person** in the Italian one. As a result, we need to find a strategy to classify pages in all languages to the most specific class. The strategy is defined as follows:
@@ -46,8 +50,6 @@ In the experiments, we exploits existing handcrafted mappings in six languages (
 
 Precision and recall values are calculated using existing mappings from DBpedia official mapping website as gold standard.
 
-For Bulgarian, we have the following results
+For Bulgarian, we have the following results (The results are stored in these files: [data_without_wikidata](/Plot/data_without_wikidata.csv) and [data_with_wikidata](/Plot/data_with_wikidata.csv))
 
 ![Alt](/Plot/figure1.png)
-
-![Alt](/Plot/figure2.png)
