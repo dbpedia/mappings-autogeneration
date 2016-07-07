@@ -15,7 +15,7 @@ plt.legend(loc=2)
 
 plt.subplot2grid(grid_size, (1, 0), rowspan=1, colspan=1)
 plt.plot(d1["L"], d1["recall"], marker="o", label="without wikidata")
-plt.plot(d2["L"], d2["recall"], marker="o", label="without wikidata")
+plt.plot(d2["L"], d2["recall"], marker="o", label="with wikidata")
 plt.ylabel('Recall')
 plt.xlabel('L')
 plt.xlim(0.1, 0.9)
