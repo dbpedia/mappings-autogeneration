@@ -44,6 +44,12 @@ Authority_control | Slackware | Infobox_OS | Slackware | Software
 Authority_control | OpenSUSE | Authority_control | OpenSUSE | owl#Thing
 Authority_control | FreeBSD | Infobox_OS | FreeBSD | Software
 
+### Evaluation Metric
+
+$$l_h(\hat y, y)=\sum_{i=1}^{\lvert C \rvert}1_{\hat y_i \ne y_i}$$
+
+$$hl_H(\hat y, y)=\sum_{i=1}^{\vert C \rvert}1_{\hat y_i \ne y_i} \max_{\{j|c_i \sqsubseteq c_j\}}1_{\hat y_j = y_j}$$
+
 ### Experiments
 
 In the experiments, we exploits existing handcrafted mappings in six languages (English, Italian, German, Portuguese, Spanish, French). Experiments have benn carried out on 5 languages (Bulgarian, Czech, Indonesian, Dutch and Catalan).
