@@ -44,12 +44,6 @@ Authority_control | Slackware | Infobox_OS | Slackware | Software
 Authority_control | OpenSUSE | Authority_control | OpenSUSE | owl#Thing
 Authority_control | FreeBSD | Infobox_OS | FreeBSD | Software
 
-### Evaluation Metric
-
-$$l_h(\hat y, y)=\sum_{i=1}^{\lvert C \rvert}1_{\hat y_i \ne y_i}$$
-
-$$hl_H(\hat y, y)=\sum_{i=1}^{\vert C \rvert}1_{\hat y_i \ne y_i} \max_{\{j|c_i \sqsubseteq c_j\}}1_{\hat y_j = y_j}$$
-
 ### Experiments
 
 In the experiments, we exploits existing handcrafted mappings in six languages (English, Italian, German, Portuguese, Spanish, French). Experiments have benn carried out on 5 languages (Bulgarian, Czech, Indonesian, Dutch and Catalan).
@@ -73,3 +67,7 @@ Settlement | Village | Settlement
 FormulaOneRacing | GrandPrix | owl#Thing
 
 From which, we can find that there are 3 out of 5 cases that the predicted class is a subclass of the labeled class. In the current evaluation metric, we treat them as false positives which is not that accurate. As a result, we'd better propose a better evaluation metric.
+
+### High-quality Output Mappings for Chinese
+
+Setting **L** as 0.9 and **C** as 100, I get 501 mappings for Chinese. After manual checking, I filter out 456 high-quality mappings as output of the project, which can be found in [this file](/Output/predicted/zh.csv). 
