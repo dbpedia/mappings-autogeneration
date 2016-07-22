@@ -30,6 +30,58 @@ EXISTING_MAPPING_OUTPUT = {
 	"bg" : "%s/mapping/existing_mapping_bg.csv" % OUTPUT_DIR,
 }
 
+INSTANCE_TYPES = {
+	"en" : "%s/type/instance_types_en.ttl" % DATA_DIR,
+	"de" : "%s/type/instance_types_de.ttl" % DATA_DIR,
+	"it" : "%s/type/instance_types_it.ttl" % DATA_DIR,
+	"pt" : "%s/type/instance_types_pt.ttl" % DATA_DIR,
+	"fr" : "%s/type/instance_types_fr.ttl" % DATA_DIR,
+	"es" : "%s/type/instance_types_es.ttl" % DATA_DIR,
+	"wikidata" : "%s/type/instance_types_wikidata.ttl" % DATA_DIR,
+	"bg" : "%s/type/instance_types_bg.ttl" % DATA_DIR,
+	"zh" : "%s/type/instance_types_zh.ttl" % DATA_DIR,
+}
+
+LITERALS = {
+	"en" : "%s/property/mappingbased_literals_en.ttl" % DATA_DIR,
+	"de" : "%s/property/mappingbased_literals_de.ttl" % DATA_DIR,
+}
+
+OBJECTS = {
+	"en" : "%s/property/mappingbased_objects_en.ttl" % DATA_DIR,
+	"de" : "%s/property/mappingbased_objects_de.ttl" % DATA_DIR,
+}
+
+ENTITY = {
+	"en" : "%s/tensor/entity_en.pkl" % OUTPUT_DIR,
+}
+
+PREDICATE = {
+	"en" : "%s/tensor/predicate_en.pkl" % OUTPUT_DIR,
+}
+
+TENSOR = {
+	"en" : "%s/tensor/tensor_en.pkl" % OUTPUT_DIR,
+}
+
+INSTANCE = {
+	"en" : "%s/tensor/instance_en.pkl" % OUTPUT_DIR,
+}
+
+TYPE = {
+	"en" : "%s/tensor/type_en.pkl" % OUTPUT_DIR,
+}
+
+TYPE_DICT = {
+	"en" : "%s/type/en.pkl" % OUTPUT_DIR,
+	"de" : "%s/type/de.pkl" % OUTPUT_DIR,
+	"it" : "%s/type/it.pkl" % OUTPUT_DIR,
+	"pt" : "%s/type/pt.pkl" % OUTPUT_DIR,
+	"fr" : "%s/type/fr.pkl" % OUTPUT_DIR,
+	"es" : "%s/type/es.pkl" % OUTPUT_DIR,
+	"wikidata" : "%s/type/wikidata.pkl" % OUTPUT_DIR,
+}
+
 ARTICLE_TEMPLATES = {
 	"en" : "%s/article/article_templates_en.ttl" % DATA_DIR,
 	"de" : "%s/article/article_templates_de.ttl" % DATA_DIR,
@@ -77,23 +129,35 @@ ILL = {
 ILL_DICT = {
 	"zh2en" : "%s/link/dict_zh2en.pkl" % OUTPUT_DIR,
 	"zh2de" : "%s/link/dict_zh2de.pkl" % OUTPUT_DIR,
+	"zh2it" : "%s/link/dict_zh2it.pkl" % OUTPUT_DIR,
+	"zh2fr" : "%s/link/dict_zh2fr.pkl" % OUTPUT_DIR,
+	"zh2pt" : "%s/link/dict_zh2pt.pkl" % OUTPUT_DIR,
+	"zh2es" : "%s/link/dict_zh2es.pkl" % OUTPUT_DIR,
+	"zh2wikidata" : "%s/link/dict_zh2wikidata.pkl" % OUTPUT_DIR,
 	"bg2en" : "%s/link/dict_bg2en.pkl" % OUTPUT_DIR,
 	"bg2de" : "%s/link/dict_bg2de.pkl" % OUTPUT_DIR,
 	"bg2it" : "%s/link/dict_bg2it.pkl" % OUTPUT_DIR,
 	"bg2fr" : "%s/link/dict_bg2fr.pkl" % OUTPUT_DIR,
 	"bg2pt" : "%s/link/dict_bg2pt.pkl" % OUTPUT_DIR,
 	"bg2es" : "%s/link/dict_bg2es.pkl" % OUTPUT_DIR,
+	"bg2wikidata" : "%s/link/dict_bg2wikidata.pkl" % OUTPUT_DIR,
 }
 
 ENTITY_MATRIX = {
 	"zh2en" : "%s/matrix/zh2en.csv" % OUTPUT_DIR,
 	"zh2de" : "%s/matrix/zh2de.csv" % OUTPUT_DIR,
+	"zh2fr" : "%s/matrix/zh2fr.csv" % OUTPUT_DIR,
+	"zh2pt" : "%s/matrix/zh2pt.csv" % OUTPUT_DIR,
+	"zh2it" : "%s/matrix/zh2it.csv" % OUTPUT_DIR,
+	"zh2es" : "%s/matrix/zh2es.csv" % OUTPUT_DIR,
+	"zh2wikidata" : "%s/matrix/zh2wikidata.csv" % OUTPUT_DIR,
 	"bg2en" : "%s/matrix/bg2en.csv" % OUTPUT_DIR,
 	"bg2de" : "%s/matrix/bg2de.csv" % OUTPUT_DIR,
 	"bg2it" : "%s/matrix/bg2it.csv" % OUTPUT_DIR,
 	"bg2fr" : "%s/matrix/bg2fr.csv" % OUTPUT_DIR,
 	"bg2pt" : "%s/matrix/bg2pt.csv" % OUTPUT_DIR,
 	"bg2es" : "%s/matrix/bg2es.csv" % OUTPUT_DIR,
+	"bg2wikidata" : "%s/matrix/bg2wikidata.csv" % OUTPUT_DIR,
 }
 
 MAPPED_INFOBOX = {
@@ -111,6 +175,7 @@ LANG_PREFIX = {
 	"pt" : "http://pt.dbpedia.org/resource/",
 	"zh" : "http://zh.dbpedia.org/resource/",
 	"bg" : "http://bg.dbpedia.org/resource/",
+	"wikidata" : "http://wikidata.dbpedia.org/resource/",
 }
 
 TEMPLATE_NAME = {
