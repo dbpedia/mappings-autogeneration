@@ -90,10 +90,11 @@ def parse(lang="en"):
 	pkl_utils._save(config.PREDICATE[lang], predicateDict)
 	pkl_utils._save(config.INSTANCE[lang], instanceDict)
 	pkl_utils._save(config.TYPE[lang], typeDict)
+	pkl_utils._save(config.TYPE_MATRIX[lang], (rows, cols))
 	_log.info("parsing complete")
 
 def predict_rescal_als(T, idx):
-	A, R, _, _, _ = rescal_als(T, 10, maxIter=10, lambda_A=10, lambda_R=10)
+	A, R, _, _, _ = rescal_als(T, 10, maxIter=10, lambda_A=10, lambda_R=10, compute_fit=False)
 	n = A.shape[0]
 	P = np.dot(A, np.dot(R[-1], A[idx, :].T))
 	nrm = np.linalg.norm(P)
@@ -105,9 +106,10 @@ def factorize(lang="en"):
 	X = pkl_utils._load(config.TENSOR[lang])
 	entityDict = pkl_utils._load(config.ENTITY[lang])
 	typeDict = pkl_utils._load(config.TYPE[lang])
+	entry = pkl_utils._load(config.TYPE_MATRIX[lang])
 	t2e = {typeDict[t]:entityDict[t] for t in typeDict}
 	_log.info("Data has been loaded")
-	N, M = X.shape[0], X.shape[2]
+	N, M = X[0].shape[0], len(X)
 	_log.info('Datasize: %d x %d x %d' % (N, N, M))
 
 	FOLDS = 5
@@ -119,15 +121,25 @@ def factorize(lang="en"):
 	GROUND_TRUTH = X[-1][:, tid]
 	AUC = np.zeros(FOLDS)
 	for f in range(FOLDS):
-		idx = IDX[offset:offset+fsz]
+		idx = set(IDX[offset:offset+fsz])
 		offset += fsz
 		_log.info('Fold %d' % f)
-		T = [x.copy for x in X]
-		for i in idx:
-			T[-1][i, tid]] = 0
+		T = [x.copy() for x in X[:-1]]
+		rows = []
+		cols = []
+		data = []
+		for x,y in zip(entry[0], entry[1]):
+			if (x in idx) and (y == tid):
+				continue
+			rows.append(x)
+			cols.append(y)
+			data.append(1)
+		T.append(spsp.csr_matrix((data, (rows, cols)), (N, N)))
+		_log.info('Construction complete')
 		P = predict_rescal_als(T, tid)
-		precision, recall, _ = precision_recall_curve(,P)
+		precision, recall, _ = precision_recall_curve(GROUND_TRUTH, P)
 		AUC[f] = auc(precision, recall)
+		_log.info('AUC: %f' % AUC[f])
 	
 	_log.info('AUC-PR Test Mean / Std: %f / %f' % (AUC.mean(), AUC.std()))
 
@@ -135,8 +147,8 @@ def factorize(lang="en"):
 def main(options):
 	lang = options.lang
 
-	parse(lang)
-	#factorize(lang)
+	#parse(lang)
+	factorize(lang)
 
 if __name__ == "__main__":
 	parser = OptionParser()
