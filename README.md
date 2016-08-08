@@ -74,6 +74,8 @@ Setting **L** as 0.9 and **C** as 100, I get 501 mappings for Chinese. After man
 
 ### Tensor Factorization on DBpedia
 
+![Alt](/Images/RESCAL.png)
+
 Using ideas in [Factorizing YAGO](http://www.dbs.ifi.lmu.de/~tresp/papers/p271.pdf), the script ```factorization.py``` can compute a score for given triples indicating the likelihood of the existance of the triples.
 
 Given input like [this file](/Code/input.csv), we can get an output like [this file](/Code/output.csv). We can use the score to help determine whether to add some triples to DBpedia.
