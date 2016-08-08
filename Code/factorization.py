@@ -5,19 +5,25 @@ from rescal import rescal_als
 import config
 from optparse import OptionParser
 from utils import time_utils, pkl_utils
-from sklearn.metrics import precision_recall_curve, auc
-from numpy.random import shuffle
+import os
 
 import logging
 logging.basicConfig(level=logging.INFO)
-_log = logging.getLogger('Tensor Factorization for DBpedia')
+_log = logging.getLogger('RESCAL')
 
 def parse_args(parser):
 	parser.add_option("-l", "--lang", default="en", type="string", dest="lang", help="specify the language")
+	parser.add_option("-p", "--parse", default=False, action="store_true", dest="parse", help="enable the parsing module")
+	parser.add_option("-t", "--train", default=False, action="store_true", dest="train", help="enable the training module")
+	parser.add_option("-r", "--rank", default=10, type="int", dest="r", help="specify the rank")
+	parser.add_option("-i", "--iteration", default=10, type="int", dest="i", help="specify the number of iteration")
+	parser.add_option("--fin", type="string", dest="fin", help="the path of input file")
+	parser.add_option("--fout", type="string", dest="fout", help="the path of output file")
 	(options, args) = parser.parse_args()
 	return options, args
 
 def parse(lang="en"):
+	_log.info("starting parsing")
 	infile = open(config.INSTANCE_TYPES[lang])
 	rdf_type = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
 	type_entries = []
@@ -75,7 +81,7 @@ def parse(lang="en"):
 		data = [1 for entry in entries]
 		mat = spsp.csr_matrix((data, (rows, cols)), (N, N))
 		tensor.append(mat)
-		predicateDict[cnt] = predicate
+		predicateDict[predicate] = cnt
 		cnt += 1
 	type_entries = [entry for entry in type_entries if entry[0] in instanceSet]
 	rows = [entityDict[entry[0]] for entry in type_entries]
@@ -83,7 +89,7 @@ def parse(lang="en"):
 	data = [1 for entry in type_entries]
 	mat = spsp.csr_matrix((data, (rows, cols)), (N, N))
 	tensor.append(mat)
-	predicateDict[cnt] = rdf_type
+	predicateDict[rdf_type] = cnt
 	_log.info("%d relations" % (cnt+1))
 	pkl_utils._save(config.TENSOR[lang], tensor)
 	pkl_utils._save(config.ENTITY[lang], entityDict)
@@ -93,62 +99,47 @@ def parse(lang="en"):
 	pkl_utils._save(config.TYPE_MATRIX[lang], (rows, cols))
 	_log.info("parsing complete")
 
-def predict_rescal_als(T, idx):
-	A, R, _, _, _ = rescal_als(T, 10, maxIter=10, lambda_A=10, lambda_R=10, compute_fit=False)
-	n = A.shape[0]
-	P = np.dot(A, np.dot(R[-1], A[idx, :].T))
-	nrm = np.linalg.norm(P)
-	if nrm != 0:
-		P = np.round_(P/nrm, decimals=3)
-	return P
-
-def factorize(lang="en"):
+def tensor_factorization(lang, r, n_iter):
+	_log.info("start factorization")
 	X = pkl_utils._load(config.TENSOR[lang])
-	entityDict = pkl_utils._load(config.ENTITY[lang])
-	typeDict = pkl_utils._load(config.TYPE[lang])
-	entry = pkl_utils._load(config.TYPE_MATRIX[lang])
-	t2e = {typeDict[t]:entityDict[t] for t in typeDict}
-	_log.info("Data has been loaded")
-	N, M = X[0].shape[0], len(X)
-	_log.info('Datasize: %d x %d x %d' % (N, N, M))
+	_log.info("data loading complete")
+	A, R, _, _, _ = rescal_als(X, r, maxIter=n_iter, lambda_A=10, lambda_R=10, compute_fit=False)
+	data_output = {'A':A, 'R':R}
+	pkl_utils._save(config.RESCAL_OUTPUT[lang], data_output)
+	_log.info("factorization complete")
 
-	FOLDS = 5
-	IDX = list(range(N))
-	shuffle(IDX)
-	fsz = int(N/FOLDS)
-	offset = 0
-	tid = t2e[typeDict["http://dbpedia.org/ontology/Person"]]
-	GROUND_TRUTH = X[-1][:, tid]
-	AUC = np.zeros(FOLDS)
-	for f in range(FOLDS):
-		idx = set(IDX[offset:offset+fsz])
-		offset += fsz
-		_log.info('Fold %d' % f)
-		T = [x.copy() for x in X[:-1]]
-		rows = []
-		cols = []
-		data = []
-		for x,y in zip(entry[0], entry[1]):
-			if (x in idx) and (y == tid):
-				continue
-			rows.append(x)
-			cols.append(y)
-			data.append(1)
-		T.append(spsp.csr_matrix((data, (rows, cols)), (N, N)))
-		_log.info('Construction complete')
-		P = predict_rescal_als(T, tid)
-		precision, recall, _ = precision_recall_curve(GROUND_TRUTH, P)
-		AUC[f] = auc(precision, recall)
-		_log.info('AUC: %f' % AUC[f])
-	
-	_log.info('AUC-PR Test Mean / Std: %f / %f' % (AUC.mean(), AUC.std()))
-
+def compute_scores(A, R, ss, ps, os):
+	return np.array([
+		np.dot(A[ss[i], :], np.dot(R[ps[i]], A[os[i], :].T))
+		for i in range(len(ss))
+	])
 
 def main(options):
 	lang = options.lang
+	fin = options.fin
+	fout = options.fout
+	p = options.parse
+	t = options.train
+	r = options.r
+	n_iter = options.i
 
-	#parse(lang)
-	factorize(lang)
+	if p:
+		parse(lang)
+	if t:
+		tensor_factorization(lang, r, n_iter)
+	
+	entityDict = pkl_utils._load(config.ENTITY[lang])
+	predicateDict = pkl_utils._load(config.PREDICATE[lang])
+	tf = pkl_utils._load(config.RESCAL_OUTPUT[lang])
+	A = tf["A"]
+	R = tf["R"]
+	df = pd.read_csv(fin, names=["s", "p", "o"])
+	df["s"] = df["s"].map(entityDict)
+	df["p"] = df["p"].map(predicateDict)
+	df["o"] = df["o"].map(entityDict)
+	scores = compute_scores(A, R, list(df["s"]), list(df["p"]), list(df["o"]))
+	pd.DataFrame(scores).to_csv(fout, index=False, header=False)
+
 
 if __name__ == "__main__":
 	parser = OptionParser()
