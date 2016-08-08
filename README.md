@@ -71,3 +71,11 @@ From which, we can find that there are 3 out of 5 cases that the predicted class
 ### High-quality Output Mappings for Chinese
 
 Setting **L** as 0.9 and **C** as 100, I get 501 mappings for Chinese. After manual checking, I filter out 456 high-quality mappings as output of the project, which can be found in [this file](/Output/predicted/zh.csv). 
+
+### Tensor Factorization on DBpedia
+
+Using ideas in [Factorizing YAGO](http://www.dbs.ifi.lmu.de/~tresp/papers/p271.pdf), the script ```factorization.py``` can compute a score for given triples indicating the likelihood of the existance of the triples.
+
+Given input like [this file](/Code/input.csv), we can get an output like [this file](/Code/output.csv). We can use the score to help determine whether to add some triples to DBpedia.
+
+In order to use this script, the package [RESCAL](https://github.com/mnick/rescal.py) needs to be installed first.
