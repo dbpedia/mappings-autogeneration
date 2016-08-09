@@ -2,9 +2,9 @@
 # --------------------- PATH ---------------------------
 
 # Set the paths for data directory and output directory
-ROOT_DIR = "../.."
-DATA_DIR = "%s/data/DBpedia/Data" % ROOT_DIR
-OUTPUT_DIR = "%s/data/DBpedia/Output" % ROOT_DIR
+ROOT_DIR = "/nfs/data1/pxu4"
+DATA_DIR = "%s/DBpedia/Data" % ROOT_DIR
+OUTPUT_DIR = "%s/DBpedia/Output" % ROOT_DIR
 
 ONTOLOGY = "%s/dbpedia_2015-10.nt" % DATA_DIR
 ONTOLOGY_TREE = "%s/ontology.pkl" % OUTPUT_DIR
@@ -45,31 +45,49 @@ INSTANCE_TYPES = {
 LITERALS = {
 	"en" : "%s/property/mappingbased_literals_en.ttl" % DATA_DIR,
 	"de" : "%s/property/mappingbased_literals_de.ttl" % DATA_DIR,
+	"bg" : "%s/property/mappingbased_literals_bg.ttl" % DATA_DIR,
 }
 
 OBJECTS = {
 	"en" : "%s/property/mappingbased_objects_en.ttl" % DATA_DIR,
 	"de" : "%s/property/mappingbased_objects_de.ttl" % DATA_DIR,
+	"bg" : "%s/property/mappingbased_objects_bg.ttl" % DATA_DIR,
 }
 
 ENTITY = {
 	"en" : "%s/tensor/entity_en.pkl" % OUTPUT_DIR,
+	"de" : "%s/tensor/entity_de.pkl" % OUTPUT_DIR,
+	"bg" : "%s/tensor/entity_bg.pkl" % OUTPUT_DIR,
 }
 
 PREDICATE = {
 	"en" : "%s/tensor/predicate_en.pkl" % OUTPUT_DIR,
+	"de" : "%s/tensor/predicate_de.pkl" % OUTPUT_DIR,
+	"bg" : "%s/tensor/predicate_bg.pkl" % OUTPUT_DIR,
 }
 
 TENSOR = {
 	"en" : "%s/tensor/tensor_en.pkl" % OUTPUT_DIR,
+	"de" : "%s/tensor/tensor_de.pkl" % OUTPUT_DIR,
+	"bg" : "%s/tensor/tensor_bg.pkl" % OUTPUT_DIR,
 }
 
 INSTANCE = {
 	"en" : "%s/tensor/instance_en.pkl" % OUTPUT_DIR,
+	"de" : "%s/tensor/instance_de.pkl" % OUTPUT_DIR,
+	"bg" : "%s/tensor/instance_bg.pkl" % OUTPUT_DIR,
 }
 
 TYPE = {
 	"en" : "%s/tensor/type_en.pkl" % OUTPUT_DIR,
+	"de" : "%s/tensor/type_de.pkl" % OUTPUT_DIR,
+	"bg" : "%s/tensor/type_bg.pkl" % OUTPUT_DIR,
+}
+
+TYPE_MATRIX = {
+	"en" : "%s/tensor/type_matrix_en.pkl" % OUTPUT_DIR,
+	"de" : "%s/tensor/type_matrix_de.pkl" % OUTPUT_DIR,
+	"bg" : "%s/tensor/type_matrix_bg.pkl" % OUTPUT_DIR,
 }
 
 TYPE_DICT = {
@@ -163,6 +181,24 @@ ENTITY_MATRIX = {
 MAPPED_INFOBOX = {
 	"zh" : "%s/predicted/zh.csv" % OUTPUT_DIR,
 	"bg" : "%s/predicted/bg.csv" % OUTPUT_DIR,
+}
+
+DATA_DICT = {
+	"bg" : "%s/embedding/bg.pkl" % OUTPUT_DIR,
+	"en" : "%s/embedding/en.pkl" % OUTPUT_DIR,
+	"de" : "%s/embedding/de.pkl" % OUTPUT_DIR,
+}
+
+RESCAL_OUTPUT = {
+	"en" : "%s/tensor/rescal_en.pkl" % OUTPUT_DIR,
+	"de" : "%s/tensor/rescal_de.pkl" % OUTPUT_DIR,
+	"bg" : "%s/tensor/rescal_bg.pkl" % OUTPUT_DIR,
+}
+
+HOLE_OUTPUT = {
+	"en" : "%s/embedding/hole_en.pkl" % OUTPUT_DIR,
+	"de" : "%s/embedding/hole_de.pkl" % OUTPUT_DIR,
+	"bg" : "%s/embedding/hole_bg.pkl" % OUTPUT_DIR,
 }
 
 # --------------------- PARAM --------------------------

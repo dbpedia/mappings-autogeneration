@@ -81,3 +81,11 @@ Using ideas in [Factorizing YAGO](http://www.dbs.ifi.lmu.de/~tresp/papers/p271.p
 Given input like [this file](/Code/input.csv), we can get an output like [this file](/Code/output.csv). We can use the score to help determine whether to add some triples to DBpedia.
 
 In order to use this script, the package [RESCAL](https://github.com/mnick/rescal.py) needs to be installed first.
+
+### Graph Embeddings on DBpedia
+
+![Alt](/Images/HOLE.png)
+
+Using ideas in [Holographic Embeddings of Knowledge Graphs](http://arxiv.org/pdf/1510.04935.pdf) and [Translating Embeddings for Modeling Multi-relational Data](http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf), the script ```hole.py``` can compute a score for given triples just like ```factorization.py``` mentioned above.
+
+In order to use this script, the package [scikit-kge](https://github.com/mnick/scikit-kge) needs to be installed first.
